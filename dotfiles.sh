@@ -1,5 +1,9 @@
 #!/bin/sh
 
-cp ~/.vimrc ./
-cp ~/.tmux.conf ./
+targets=".vimrc .tmux.conf"
+
+for target in ${targets}; do
+	echo ${target}
+	cp ~/${target} ./
+done
 
