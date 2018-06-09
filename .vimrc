@@ -1,77 +1,25 @@
-set nocompatible
-syntax enable
-filetype indent plugin on
-colorscheme darkblue
+" set background=dark
+" colorscheme darkblue
+" colorscheme elflord
+" colorscheme desert
+" colorscheme industry
+colorscheme koehler
+" colorscheme evening
+" colorscheme murphy
+" colorscheme solarized
 
-runtime! ftplugin/man.vim
-" Fold {{{"
-set foldmethod=marker
-set foldlevel=2
-set foldcolumn=3
-" }}}
+set number
+set hlsearch
 
-" NeoBundle {{{
-" mkdir -p ~/.vim/bundle
-" git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-if has('vim_starting')
-	set runtimepath+=~/.vim/bundle/neobundle.vim/
+set encoding=utf-8
+set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+
+
+if has('mac')
+  let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
+  augroup MyIMEGroup
+    autocmd!
+    autocmd InsertLeave * :call system(g:imeoff)
+    inoremap <silent> <C-c>:call system(g:imeoff)
+  augroup END
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
-" }}}
-
-" NeoBundle Plugins {{{
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'yuratomo/w3m.vim'
-NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'Blackrush/vim-gocode'
-NeoBundle 'koron/dicwin-vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/syntastic.git'
-
-NeoBundle "Shougo/vimproc", {
-    \ "build": {
-    \   "windows"   : "make -f make_mingw32.mak",
-    \   "cygwin"    : "make -f make_cygwin.mak",
-    \   "mac"       : "make -f make_mac.mak",
-    \   "unix"      : "make -f make_unix.mak",
-    \ }}
-
-NeoBundleCheck
-" }}}
-
-let g:jedi#auto_initialization = 1
-let g:jedi#rename_command = "<leader>R"
-let g:jedi#popup_on_dot = 1
-
-
-" Disable AutoComplPop.
-" let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-	\ 'default' : ''
-	\ }
-
-highlight Pmenu     guibg=#666666
-highlight PmenuSel  guibg=#8cd0d3 guifg=#666666
-highlight PmenuSbar guibg=#333333
-highlight Pmenu     ctermbg=4
-highlight PmenuSel  ctermbg=0
-highlight PmenuSbar ctermbg=4
-
-if !exists('g:neocomplcache_omni_patterns')
-	let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.go = '\h\w*\.\?'
-" let g:neocomplcache_omni_patterns.go = '\h\w*\%.'
