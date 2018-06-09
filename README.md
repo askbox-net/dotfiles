@@ -14,4 +14,4 @@
 ~/.tmux.conf
 
 ## サイト
-[fx](https://fx.askbox.net/)
+[FX](https://fx.askbox.net/)
